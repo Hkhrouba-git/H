@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل البيانات</title>
+    <!-- إضافة خط من Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* تنسيق عام للصفحة */
+        body {
+            font-family: 'Tajawal', sans-serif; /* استخدام خط Tajawal */
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* الوضع الليلي */
+        body.dark-mode {
+            background-color: #1a1a1a;
+            color: #f4f4f9;
+        }
+
+        /* تنسيق العنوان الرئيسي */
+        h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            transition: color 0.3s;
+            font-weight: 700; /* سماكة الخط */
+        }
+
+        body.dark-mode h1 {
+            color: #3498db;
+        }
+
+        /* تنسيق الحاوية الرئيسية */
+        .container {
+            display: inline-block;
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+            max-width: 500px;
+            width: 90%;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        body.dark-mode .container {
+            background-color: #2c3e50;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* تنسيق حقول الإدخال */
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+            font-family: 'Tajawal', sans-serif; /* استخدام خط Tajawal */
+        }
+
+        body.dark-mode input, body.dark-mode select {
+            background-color: #34495e;
+            border-color: #555;
+            color: #f4f4f9;
+        }
+
+        /* تنسيق الزر */
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-family: 'Tajawal', sans-serif; /* استخدام خط Tajawal */
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        /* زر تبديل الوضع الليلي */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+
+        .dark-mode-toggle:hover {
+            background-color: #2980b9;
+        }
+
+        /* تحسينات للهواتف المحمولة */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            input, select, button {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- زر تبديل الوضع الليلي -->
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button>
+
+    <div class="container">
+        <h1>تسجيل البيانات</h1>
+        <input type="text" id="studentName" placeholder="اسم الطالب">
+        <input type="text" id="studentId" placeholder="رقم القيد">
+        <select id="subject">
+            <option value="math">البرمجة الشيئية</option>
+            <option value="science">التحليل العددي</option>
+            <option value="history">هندسة رياضية</option>
+        </select>
+        <button onclick="registerStudent()">التسجيل</button>
+    </div>
+
+    <script>
+        // تبديل الوضع الليلي
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        // تسجيل البيانات باستخدام GET
+        function registerStudent() {
+            const studentName = document.getElementById('studentName').value;
+            const studentId = document.getElementById('studentId').value;
+            const subject = document.getElementById('subject').value;
+
+            if (studentName && studentId && subject) {
+                // إرسال البيانات إلى Google Sheets باستخدام GET
+                const url = `https://script.google.com/macros/s/AKfycbxFFuD_Ubpwn5nRZkXhcenuF1pwtj5GLYbUrhR58ZtiLCwiFPtxlaZD5T9XWJj7WBG7OA/exec?name=${encodeURIComponent(studentName)}&id=${encodeURIComponent(studentId)}&subject=${encodeURIComponent(subject)}`;
+                
+                fetch(url, { mode: 'no-cors' })
+                    .then(() => {
+                        console.log('تم التسجيل بنجاح');
+                        // نقل المستخدم إلى صفحة بدء الاختبار
+                        window.location.href = `start-test.html?name=${encodeURIComponent(studentName)}&id=${encodeURIComponent(studentId)}&subject=${encodeURIComponent(subject)}`;
+                    })
+                    .catch(() => {
+                        console.error('حدث خطأ أثناء التسجيل');
+                        alert('حدث خطأ أثناء التسجيل');
+                    });
+            } else {
+                alert('يرجى ملء جميع الحقول');
+            }
+        }
+    </script>
+</body>
+</html>
