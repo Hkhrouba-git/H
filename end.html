@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نهاية الاختبار</title>
+    <!-- إضافة خط من Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* تنسيق عام للصفحة */
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4cc9f0;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #4bb543;
+            --text-light: #f8f9fa;
+            --text-dark: #212529;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        /* الوضع الليلي */
+        body.dark-mode {
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            color: var(--text-light);
+        }
+
+        /* تنسيق العنوان الرئيسي */
+        h1 {
+            font-size: 2.8rem;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+            transition: var(--transition);
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 0;
+            width: 50%;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        body.dark-mode h1 {
+            color: var(--accent-color);
+        }
+
+        body.dark-mode h1::after {
+            background: var(--primary-color);
+        }
+
+        /* تنسيق الحاوية الرئيسية */
+        .container {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            margin: 80px auto;
+            max-width: 800px;
+            width: 90%;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+            transform: translateY(0);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        body.dark-mode .container {
+            background: rgba(43, 45, 66, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* تنسيق النص */
+        .message {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+            margin-bottom: 30px;
+            transition: var(--transition);
+        }
+
+        body.dark-mode .message {
+            color: var(--text-light);
+        }
+
+        .message p {
+            margin-bottom: 20px;
+        }
+
+        /* زر العودة */
+        .back-button {
+            margin-top: 30px;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Tajawal', sans-serif;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+            position: relative;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+        }
+
+        .back-button:active {
+            transform: translateY(1px);
+        }
+
+        .back-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .back-button:hover::before {
+            left: 100%;
+        }
+
+        /* زر الوضع الليلي */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+        }
+
+        .dark-mode-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(30deg);
+        }
+
+        body.dark-mode .dark-mode-toggle {
+            color: var(--text-light);
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        /* تأثيرات إضافية */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: var(--accent-color);
+            opacity: 0;
+            z-index: -1;
+            animation: confetti 5s ease-in-out infinite;
+        }
+
+        @keyframes confetti {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* تحسينات للهواتف المحمولة */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 25px;
+                margin: 50px auto;
+            }
+
+            .message {
+                font-size: 1.1rem;
+            }
+
+            .back-button {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- زر تبديل الوضع الليلي -->
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <div class="container">
+        <div class="logo-container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGY2FRAvDCCB6H_ELv5wo5M7ILiRn4W5kjQA&s" alt="شعار المعهد" class="logo">
+        </div>
+            <h1>نهاية الامتحان</h1>
+        <div class="message">
+            <p>شكرًا لك على إكمال الامتحان!</p>
+            <p>نأمل أن تكون قد استمتعت بالتجربة وأن تكون الإجابات قد ساعدتك في تقييم مستواك.</p>
+            <p>سيتم مراجعة إجاباتك وإعلامك بالنتائج قريبًا.</p>
+        </div>
+        <!-- زر العودة -->
+       
+    </div>
+
+    <script>
+        // تبديل الوضع الليلي
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const icon = document.querySelector('.dark-mode-toggle i');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
+
+        // إنشاء تأثير الكونفيتي
+        function createConfetti() {
+            const colors = ['#4361ee', '#3f37c9', '#4cc9f0', '#f72585', '#7209b7'];
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = Math.random() * 10 + 5 + 'px';
+                confetti.style.height = Math.random() * 10 + 5 + 'px';
+                confetti.style.animationDelay = Math.random() * 5 + 's';
+                confetti.style.animationDuration = Math.random() * 3 + 3 + 's';
+                document.body.appendChild(confetti);
+            }
+        }
+
+        // تشغيل الكونفيتي عند تحميل الصفحة
+        window.onload = function() {
+            createConfetti();
+        };
+    </script>
+</body>
+</html>

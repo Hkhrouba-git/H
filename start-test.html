@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بدء الاختبار</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4895ef;
+            --danger-color: #f72585;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --success-color: #4cc9f0;
+            --border-radius: 12px;
+            --box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark-color);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            transition: var(--transition);
+        }
+
+        body.dark-mode {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: var(--light-color);
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            width: 90%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+        }
+
+        body.dark-mode .container {
+            background: rgba(30, 30, 46, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 0;
+            width: 50px;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        body.dark-mode h1 {
+            color: var(--accent-color);
+        }
+
+        /* بطاقة معلومات الطالب */
+        .student-card {
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.1) 0%, rgba(72, 149, 239, 0.1) 100%);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--primary-color);
+            transition: var(--transition);
+        }
+
+        body.dark-mode .student-card {
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.2) 0%, rgba(72, 149, 239, 0.2) 100%);
+        }
+
+        .student-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .info-icon {
+            margin-left: 10px;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        /* العداد الزمني */
+        .timer-container {
+            background: var(--light-color);
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            display: inline-flex;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        body.dark-mode .timer-container {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .timer {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            font-feature-settings: "tnum";
+            font-variant-numeric: tabular-nums;
+        }
+
+        .timer-icon {
+            margin-left: 10px;
+            color: var(--accent-color);
+            font-size: 1.5rem;
+        }
+
+        /* البنود والملاحظات */
+        .notes-card {
+            background: var(--light-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        body.dark-mode .notes-card {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .notes-card h2 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .notes-card h2 i {
+            margin-left: 10px;
+        }
+
+        .notes-list {
+            padding-right: 1.5rem;
+        }
+
+        .notes-list li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-right: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .notes-list li::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0.7rem;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-color);
+            border-radius: 50%;
+        }
+
+        /* الأزرار */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.1rem;
+            width: 100%;
+            margin: 0.5rem 0;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, var(--danger-color) 0%, #b5179e 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(247, 37, 133, 0.3);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(247, 37, 133, 0.4);
+        }
+
+        .btn i {
+            margin-left: 8px;
+        }
+
+        /* iframe */
+        .form-iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            border-radius: var(--border-radius);
+            margin: 1.5rem 0;
+            box-shadow: var(--box-shadow);
+            background: white;
+        }
+
+        body.dark-mode .form-iframe {
+            background: #2a2a42;
+        }
+
+        /* زر الوضع الليلي */
+        .dark-mode-toggle {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: var(--primary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 100;
+            transition: var(--transition);
+        }
+
+        .dark-mode-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* تأثيرات للهواتف */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+                margin: 1rem auto;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .timer {
+                font-size: 1.5rem;
+            }
+            
+            .form-iframe {
+                height: 400px;
+            }
+            
+            .btn {
+                padding: 0.7rem 1rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <div class="container">
+        <h1>بدء الاختبار</h1>
+        
+        <!-- بطاقة معلومات الطالب -->
+        <div class="student-card">
+            <div class="student-info" id="studentInfo">
+                <!-- سيتم تعبئته بواسطة الجافاسكريبت -->
+            </div>
+        </div>
+        
+        <!-- العداد الزمني -->
+        <div class="timer-container">
+            <i class="fas fa-clock timer-icon"></i>
+            <div class="timer" id="timer">60:00</div>
+        </div>
+
+        <!-- بطاقة البنود والملاحظات -->
+        <div class="notes-card">
+            <h2><i class="fas fa-info-circle"></i> تعليمات الاختبار</h2>
+            <ul class="notes-list">
+                <li>يجب إكمال الاختبار في الوقت المحدد (60 دقائق)</li>
+                <li>يجب تسجيل البريد الالكتروني الخاص بك</li>
+                <li>لا يُسمح بالعودة إلى الأسئلة السابقة بعد الإجابة عليها</li>
+                <li>تأكد من إدخال الإجابات بشكل صحيح قبل الضغط على ارسال</li>
+                <li>الضغط على انهاء الامتحان بعدالضغط علي ارسال</li>
+                <li>في حالة انتهاء الوقت، سيتم إغلاق الاختبار تلقائيًا</li>
+            </ul>
+        </div>
+
+        <!-- زر بدء الاختبار -->
+        <button class="btn btn-primary" onclick="startTest()">
+            <i class="fas fa-play"></i> بدء الاختبار
+        </button>
+
+        <!-- زر إنهاء الاختبار -->
+        <button class="btn btn-danger end-test-button" onclick="endTest()" style="display: none;">
+            <i class="fas fa-stop"></i> إنهاء الاختبار
+        </button>
+
+        <!-- iframe لعرض Google Form -->
+        <iframe class="form-iframe" id="formIframe" style="display: none;"></iframe>
+    </div>
+
+    <script>
+        // تبديل الوضع الليلي
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const icon = document.querySelector('.dark-mode-toggle i');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                icon.classList.replace('fa-sun', 'fa-moon');
+            }
+        }
+
+        // جلب البيانات من الرابط
+        const urlParams = new URLSearchParams(window.location.search);
+        const studentName = urlParams.get('name');
+        const studentId = urlParams.get('id');
+        const subject = urlParams.get('subject');
+
+        // روابط Google Forms لكل مادة
+        const formLinks = {
+            math1: "https://docs.google.com/forms/d/1Jw9rOOdjTy-lRHxhPsgm3lLwfKikCchL90Unbqx8Owg/viewform?embedded=true",
+            science1: "https://docs.google.com/forms/d/1gcWa-G7Cwe46RThlEzIl2czKi8l3aV3NXyysIs9tQww/viewform?embedded=true",
+            history1: "https://docs.google.com/forms/d/1ThncVgmiPzBvwHyRTxmeW9J75i4GOGvlajPAEcHHMc4/viewform?embedded=true",
+            math2: "https://docs.google.com/forms/d/1VgEGvsWV8QlTpnaUh4mz2_-rhlsqHLZx3uek1r_yM6M/viewform?embedded=true",
+            science2: "https://docs.google.com/forms/d/1t8PVN-g2Aec01nVXdp3qWMj3XlRivws275kOKP10DBU/viewform?embedded=true",
+            history2: "https://docs.google.com/forms/d/1nmFRF-TbmVzbj63Q-bqbD2E2d2DL5DKD-1wQX-vGjhA/viewform?embedded=true"
+        };
+
+        // أسماء المواد
+        const subjectNames = {
+            math1: "البرمجة الشيئية - الفصل الأول",
+            science1: "التحليل العددي - الفصل الأول",
+            history1: "هندسة رياضية - الفصل الأول",
+            math2: "أنظمة التشغيل  - الفصل الثاني",
+            science2: " نظرية المعلومات - الفصل الثاني",
+            history2: " شبكات الكمبيوتر  - الفصل الثاني"
+        };
+
+        // عرض معلومات الطالب والمادة المختارة
+        document.getElementById('studentInfo').innerHTML = `
+            <div class="info-item">
+                <i class="fas fa-user info-icon"></i>
+                <span><strong>اسم الطالب:</strong> ${studentName}</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-id-card info-icon"></i>
+                <span><strong>رقم القيد:</strong> ${studentId}</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-book info-icon"></i>
+                <span><strong>المادة:</strong> ${subjectNames[subject]}</span>
+            </div>
+        `;
+
+        // متغيرات التوقيت الزمني
+        let timerInterval;
+        let totalTime = 59 * 60; // 5 دقائق بالثواني
+
+        // بدء التوقيت الزمني
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                const minutes = Math.floor(totalTime / 60);
+                const seconds = totalTime % 60;
+
+                document.getElementById('timer').textContent = 
+                    `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+                if (totalTime <= 0) {
+                    clearInterval(timerInterval);
+                    window.location.href = "end.html";
+                } else {
+                    totalTime--;
+                }
+            }, 1000);
+        }
+
+        // بدء الاختبار
+        function startTest() {
+            if (subject) {
+                const iframe = document.getElementById('formIframe');
+                iframe.src = formLinks[subject];
+                iframe.style.display = 'block';
+                
+                document.querySelector('.end-test-button').style.display = 'block';
+                startTimer();
+            } else {
+                alert('لم يتم تحديد المادة');
+            }
+        }
+
+        // إنهاء الاختبار
+        function endTest() {
+            if (confirm("هل أنت متأكد أنك تريد إنهاء الاختبار؟")) {
+                clearInterval(timerInterval);
+                window.location.href = "end.html";
+            }
+        }
+    </script>
+</body>
+</html>
